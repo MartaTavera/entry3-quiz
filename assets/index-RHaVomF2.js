@@ -78,7 +78,7 @@ He prints the logo the wrong way up by mistake.
 
 Bret needs to turn the logo the correct way up.
 
-What fraction does Bret need to turn the logo?`,hint:"A full turn = 1. What fraction turns something 180°?",answer:"1/2",displayAnswer:"1/2",normalize:E=>E.trim().replace(/\s/g,""),check:E=>E==="1/2"||E==="0.5",explanation:"Half a turn (1/2 = 180°) corrects the logo."},{id:"B10",sec:"B",marks:1,type:"yesno",text:`Bret designs a page in a newspaper.
+What fraction does Bret need to turn the logo?`,hint:"A full turn = 360°. What fraction turns something 180°?",answer:"1/2",displayAnswer:"1/2",normalize:E=>E.trim().replace(/\s/g,""),check:E=>E==="1/2"||E==="0.5"||E=="half",explanation:"Half a turn (1/2 = 180°) corrects the logo."},{id:"B10",sec:"B",marks:1,type:"yesno",text:`Bret designs a page in a newspaper.
 
 The page has a length of 36 cm.
 
@@ -92,7 +92,7 @@ Show why you think this.`,hint:"Calculate: 36 ÷ 3",answer:"No",displayAnswer:"N
 
 He puts a picture on the poster.
 
-How far is the top of the picture from the top of the poster?`,hint:"Remaining space = poster height - picture top  .",answer:10,displayAnswer:"20 cm",explanation:"50 − 30 = 20 cm "},{id:"B12",sec:"B",marks:1,type:"choice",image:"B12 – Sign Lengths",imgSrc:"images/QuestionB12.png",text:`Bret makes a sign for a van.
+How far is the top of the picture from the top of the poster?`,hint:"Remaining space = poster height - picture top  .",answer:20,displayAnswer:"20 cm",suffix:"cm",explanation:"50 − 30 = 20 cm "},{id:"B12",sec:"B",marks:1,type:"choice",image:"B12 – Sign Lengths",imgSrc:"images/QuestionB12.png",text:`Bret makes a sign for a van.
 
 The space for the sign is 2.05 m in length.
 
@@ -111,7 +111,7 @@ He looks at the time on a clock.
 
 What time does Bret make the delivery?
 
-Use 24 hour time format.`,hint:"It is afternoon — add 12 to the hour. The minute hand points to the 9.",answer:"15:10",displayAnswer:"15:10",normalize:E=>E.trim().replace(/\s/g,""),check:E=>E==="14:45"||E==="1445",explanation:"The clock shows 2:45 pm → 24-hour format: 14:45."},{id:"B15",sec:"B",marks:1,type:"parcel",text:`Bret sends parcels to customers.
+Use 24 hour time format.`,hint:"It is afternoon — add 12 to the hour. The minute hand points to the 2.",answer:"15:10",displayAnswer:"15:10",normalize:E=>E.trim().replace(/\s/g,""),check:E=>E==="15:10"||E==="1510",explanation:"The clock shows 2:45 pm → 24-hour format: 14:45."},{id:"B15",sec:"B",marks:1,type:"parcel",text:`Bret sends parcels to customers.
 
 He has a list of the heights and weights of the parcels.
 
