@@ -12,7 +12,7 @@ import { QuestionInput } from "./components/QuestionInput";
 import { ResultsTable }  from "./components/ResultsTable";
 import { EmailPanel }    from "./components/EmailPanel";
 
-const initA = () => ({ input: "", input2: "", selected: null, yesNo: null, submitted: false, correct: false, userDisplay: "" });
+const initA = () => ({ input: "", input2: "", selected: null, yesNo: null, skipped:false, submitted: false, correct: false, attempts:0, revealed:false, userDisplay: "" });
 
 export default function Quiz() {
   const [answers, setAnswers]   = useState(() => questions.map(initA));
@@ -35,15 +35,20 @@ export default function Quiz() {
 
   const handleSubmit = () => {
     const result = checkAnswer(q, a);
-    upd({ submitted: true, ...result });
+    upd({ submitted: true, attempts:a.attempts + 1, ...result });
   };
-
+  
   const goNext  = () => { setShowHint(false); if (current + 1 >= questions.length) setFinished(true); else setCurrent(c => c + 1); };
-  const goBack  = () => { setShowHint(false); setCurrent(c => c - 1); };
-  const retry   = () => upd(initA());
-  const skip    = () => { upd({ submitted: true, correct: false, userDisplay: "(skipped)" }); goNext(); };
+  const goBack  = () => { setShowHint(false); 
+    setShowHint(false);
+  const prev = current - 1;
+    if (answers[prev].skipped) setAnswers(a => a.map((x, i) => i === prev ? initA() : x));
+      setCurrent(prev);
+  };
+  const retry = () => upd({ input: "", input2: "", inputs: undefined, selected: null, yesNo: null, submitted: false, correct: false, userDisplay: "", revealed: false });
+  const skip    = () => { upd({ submitted: true, correct: false, skipped:true,  userDisplay: "(skipped)" }); goNext(); };
   const reset   = () => { setAnswers(questions.map(initA)); setCurrent(0); setFinished(false); setShowHint(false); };
-
+  const reveal = () => { upd({revealed:true}) };
   const score = answers.filter(x => x.correct).length;
 
   // ── Results screen ──────────────────────────────────────────
@@ -127,7 +132,7 @@ return (
         <QuestionInput q={q} a={a} onUpdate={upd} onSubmit={handleSubmit} canSubmit={canSubmit} />
       )}
 
-      {a.submitted && <FeedbackBox correct={a.correct} explanation={q.explanation} />}
+      {a.submitted && <FeedbackBox correct={a.correct} explanation={q.explanation} showExplanation={a.correct || a.revealed} />}
 
       <div style={{ flex: 1 }} />
 
@@ -164,8 +169,15 @@ return (
             </button>
           </>
         )}
-      </div>
+        {a.submitted && !a.correct && !a.revealed && (
+          <button onClick={reveal}
+          style={{ padding: "13px 16px", background: "#fff", color: C.neu, border: `2px solid ${C.bdr}`, borderRadius: 8, fontSize: 15, cursor: "pointer" }}>
+            Show Answer
+          </button>
 
+        )}
+      </div>
+     
       <div style={{ marginTop: 14, textAlign: "center", fontSize: 13, color: C.neu }}>
         Score so far: {score} / {current} correct
       </div>
