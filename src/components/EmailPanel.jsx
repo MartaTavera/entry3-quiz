@@ -19,25 +19,17 @@ export function EmailPanel({ score, total, answers, questions }) {
     const results = `Entry 3 Maths Quiz\nName: ${name.trim()}\nScore: ${score}/${total} (${Math.round(score / total * 100)}%)\n\n${"─".repeat(100)}\n${rows}`;
 
     try {
-      const res = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+      const res = await fetch("https://formsubmit.co/ajax/martatavera@gmail.com", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          service_id: EJS.svc,
-          template_id: EJS.tpl,
-          user_id: EJS.key,
-          template_params: {
-            to_email: EJS.toEmail,
-            name: name.trim(),
-            score: `${score}/${total} (${Math.round(score / total * 100)}%)`,
-            results,
-          },
+          name: name.trim(),
+          results: results,
         }),
       });
       if (res.ok) setSent(true);
       else { const txt = await res.text(); setErr(`Send failed (${res.status}): ${txt}`); }
     } catch (e) { setErr("Network error. Please try again."); }
-
     setSending(false);
   };
 
