@@ -1,7 +1,7 @@
 export const questions = [
   {
     id: "A1", sec: "A", marks: 2, type: "number",
-    text: "Bret is planning a trip to see a football match.\n\nHe saves £85 each month for the trip.\n\nHe will save for 4 months.\n\nHow much will he save in total?",
+    text: "Bret is planning a trip to see IF THINGS ARE WORKING a football match.\n\nHe saves £85 each month for the trip.\n\nHe will save for 4 months.\n\nHow much will he save in total?",
     hint: "Multiply: £85 × 4",
     answer: 340, displayAnswer: "£340",
     explanation: "£85 × 4 = £340",
@@ -37,7 +37,11 @@ export const questions = [
     text: "Bret works for a printing company.\n\nHe buys 5 packs of card.\n\nEach pack of card costs £14.06\n\nHow much money does Bret pay in total for the packs of card?\n\nUse the correct money format.",
     hint: "Multiply: 14.06 × 5",
     answer: 70.30, displayAnswer: "£70.30",
-    check: v => Math.abs(parseFloat(v.replace(/^£/, "")) - 70.30) < 0.01,
+    check: v => {
+      const trimmed = v.trim();
+      if (!trimmed.startsWith("£")) return false;
+      return Math.abs(parseFloat(trimmed.slice(1)) - 70.30) < 0.01;
+    },
     explanation: "£14.06 × 5 = £70.30",
   },
   {
@@ -84,15 +88,15 @@ export const questions = [
     text: "The chart shows the costs of copying documents.\n\nA customer wants a large size copy.\n\nBret says a large size colour copy costs 48p more than a large size black and white copy.\n\nIs Bret correct?\n\nShow why you think this.",
     hint: "Read the two 'large size' bars, then subtract.",
     answer: "No", displayAnswer: "No",
-    explanation: "Large colour ≈ 64p, large B&W ≈ 19p. 64 − 19 = 45p, not 48p. Bret is incorrect.",
+    explanation: "Large colour ≈ 64p, large B&W ≈ 18p. 64 − 18 = 46p, not 48p. Bret is incorrect.",
   },
   {
     id: "B8", sec: "B", marks: 3, type: "yesno",
     image: "B8 – Business Card Box & Ruler", imgSrc: "images/QuestionB8.png",
     text: "Bret sells business cards in a box.\n\nThe length of the business cards needs to be 20 mm less than the length of the box.\n\nBret says the business cards will be 6 cm in length.\n\nIs Bret correct?\n\nShow why you think this.",
     hint: "20 mm = 2 cm. Subtract 2 cm from the box length.",
-    answer: "Yes", displayAnswer: "Yes",
-    explanation: "Box = 8 cm. 20 mm = 2 cm. 8 − 2 = 6 cm. Bret is correct.",
+    answer: "No", displayAnswer: "No",
+    explanation: "Box = 9 cm. 20 mm = 2 cm. 9 − 2 = 7 cm. Bret is not correct.",
   },
   {
     id: "B9", sec: "B", marks: 1, type: "text",
@@ -116,8 +120,8 @@ export const questions = [
     image: "B11 – Poster Diagram", imgSrc: "images/QuestionB11.png",
     text: "Bret designs a poster about a concert.\n\nHe puts a picture on the poster.\n\nHow far is the top of the picture from the top of the poster?",
     hint: "Remaining space = 50 − 30 = 20 cm, split equally above and below.",
-    answer: 10, displayAnswer: "10 cm", suffix: "cm",
-    explanation: "50 − 30 = 20 cm spare ÷ 2 = 10 cm from the top.",
+    answer: 20, displayAnswer: "20 cm", suffix: "cm",
+    explanation: "50 − 30 = 20 cm from the top.",
   },
   {
     id: "B12", sec: "B", marks: 1, type: "choice",
@@ -143,8 +147,8 @@ export const questions = [
     hint: "It is afternoon — add 12 to the hour. The minute hand points to the 9.",
     answer: "14:45", displayAnswer: "14:45",
     normalize: v => v.trim().replace(/\s/g, ""),
-    check: v => v === "14:45" || v === "1445",
-    explanation: "The clock shows 2:45 pm → 24-hour format: 14:45.",
+    check: v => v === "3:10pm" || v === "3:10 pm" || v==="3.10pm",
+    explanation: "The clock shows 3:10 pm → 24-hour format: 15:10.",
   },
   {
     id: "B15", sec: "B", marks: 1, type: "parcel",
@@ -158,8 +162,8 @@ export const questions = [
     image: "B16 – Water Bottle", imgSrc: "images/QuestionB16.png",
     text: "Bret takes a water bottle to work.\n\nHe has 1 litre of water in the bottle at the start of the day.\n\nThe diagram shows the water left over at the end of the day.\n\nHow much water did Bret use to the nearest division? (ml)",
     hint: "Subtract: 1000 − 250",
-    answer: 750, displayAnswer: "750 ml", suffix: "ml",
-    explanation: "1000 − 250 = 750 ml used.",
+    answer: 700, displayAnswer: "700 ml", suffix: "ml",
+    explanation: "1000 − 300 = 700 ml used.",
   },
   {
     id: "B17", sec: "B", marks: 1, type: "number",
@@ -167,7 +171,7 @@ export const questions = [
     text: "The chart shows the weekly wages of people in different jobs.\n\nBret is paid a wage of £330 each week.\n\nHow much more is Bret paid each week than a person with the least wage?",
     hint: "Find the shortest bar (lowest wage) and read its value, then subtract from £330.",
     answer: 40, displayAnswer: "£40",
-    check: v => [38,39,40,41,42,43,44,45].includes(parseInt(v)),
+    check: v => [38,39,40,41,42,43,44,45].includes(parseInt(String(v).replace(/^£/, ""))),
     explanation: "The hairdresser has the lowest wage (~£290). £330 − £290 = £40. (Answers between £38–£45 accepted.)",
   },
 ];
