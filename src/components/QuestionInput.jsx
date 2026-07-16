@@ -1,7 +1,7 @@
 import { C } from "../config/constants";
 import { ParcelTable } from "./ParcelTable";
 
-export function QuestionInput({ q, a, onUpdate, onSubmit, canSubmit }) {
+export function QuestionInput({ q, a, onUpdate, onSubmit, canSubmit, showHint }) {
   const upd = patch => onUpdate(patch);
 
   if (q.type === "number" || q.type === "text") {
@@ -61,19 +61,34 @@ export function QuestionInput({ q, a, onUpdate, onSubmit, canSubmit }) {
   if (q.type === "yesno") {
     const sc = q.sec === "A" ? C.a : C.b;
     return (
-      <div style={{ display: "flex", gap: 14, marginBottom: 18 }}>
-        {["Yes", "No"].map(v => (
-          <button key={v} onClick={() => upd({ yesNo: v })}
-            style={{ flex: 1, padding: "16px", border: `2px solid ${a.yesNo === v ? sc : C.bdr}`, borderRadius: 8, background: a.yesNo === v ? (q.sec === "A" ? "#e0f2fe" : "#ede9fe") : "#fff", color: a.yesNo === v ? sc : "#334155", fontSize: 20, fontWeight: 600, cursor: "pointer", transition: "all 0.12s" }}>
-            {v}
-          </button>
-        ))}
+      <div style={{ marginBottom: 18 }}>
+        <div style={{ display: "flex", gap: 14 }}>
+          {["Yes", "No"].map(v => (
+            <button key={v} onClick={() => upd({ yesNo: v })}
+              style={{ flex: 1, padding: "16px", border: `2px solid ${a.yesNo === v ? sc : C.bdr}`, borderRadius: 8, background: a.yesNo === v ? (q.sec === "A" ? "#e0f2fe" : "#ede9fe") : "#fff", color: a.yesNo === v ? sc : "#334155", fontSize: 20, fontWeight: 600, cursor: "pointer", transition: "all 0.12s" }}>
+              {v}
+            </button>
+          ))}
+        </div>
+        {q.justifyPrompt && a.yesNo && (
+          <div style={{ marginTop: 12 }}>
+            <div style={{ fontSize: 13, fontWeight: 600, color: C.neu, marginBottom: 5 }}>{q.justifyPrompt}</div>
+            <input
+              type="text"
+              value={a.justify}
+              onChange={e => upd({ justify: e.target.value })}
+              onKeyDown={e => e.key === "Enter" && canSubmit && onSubmit()}
+              placeholder="Enter your answer…"
+              style={{ width: "100%", padding: "13px 16px", border: `2px solid ${C.bdr}`, borderRadius: 8, fontSize: 20, outline: "none", boxSizing: "border-box" }}
+            />
+          </div>
+        )}
       </div>
     );
   }
 
   if (q.type === "parcel") {
-    return <ParcelTable sel={a.selected} onSel={v => upd({ selected: v })} />;
+    return <ParcelTable sel={a.selected} onSel={v => upd({ selected: v })} showHint={showHint} />;
   }
 
   return null;

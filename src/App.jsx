@@ -12,7 +12,7 @@ import { QuestionInput } from "./components/QuestionInput";
 import { ResultsTable }  from "./components/ResultsTable";
 import { EmailPanel }    from "./components/EmailPanel";
 
-const initA = () => ({ input: "", input2: "", selected: null, yesNo: null, skipped:false, submitted: false, correct: false, attempts:0, revealed:false, userDisplay: "" });
+const initA = () => ({ input: "", input2: "", selected: null, yesNo: null,  justify: "", skipped:false, submitted: false, correct: false, attempts:0, revealed:false, userDisplay: "" });
 
 export default function Quiz() {
   const [answers, setAnswers]   = useState(() => questions.map(initA));
@@ -29,7 +29,7 @@ export default function Quiz() {
     q.type === "number"    ? a.input !== "" :
     q.type === "text"      ? a.input !== "" :
     q.type === "choice"    ? !!a.selected :
-    q.type === "yesno"     ? !!a.yesNo :
+    q.type === "yesno"     ? !!a.yesNo && (!q.justifyPrompt || a.justify !== "") :
     q.type === "parcel"    ? !!a.selected :
     q.type === "twonumber" ? a.input !== "" && a.input2 !== "" : false;
 
@@ -129,8 +129,9 @@ return (
       {!a.submitted && <HintBox hint={q.hint} show={showHint} onToggle={() => setShowHint(h => !h)} />}
 
       {!a.submitted && (
-        <QuestionInput q={q} a={a} onUpdate={upd} onSubmit={handleSubmit} canSubmit={canSubmit} />
+        <QuestionInput q={q} a={a} onUpdate={upd} onSubmit={handleSubmit} canSubmit={canSubmit} showHint={showHint} />
       )}
+      
 
       {a.submitted && <FeedbackBox correct={a.correct} explanation={q.explanation} showExplanation={a.correct || a.revealed} />}
 

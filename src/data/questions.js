@@ -1,7 +1,7 @@
 export const questions = [
   {
     id: "A1", sec: "A", marks: 2, type: "number",
-    text: "Bret is planning a trip to see IF THINGS ARE WORKING a football match.\n\nHe saves £85 each month for the trip.\n\nHe will save for 4 months.\n\nHow much will he save in total?",
+    text: "Bret is planning a trip to see a football match.\n\nHe saves £85 each month for the trip.\n\nHe will save for 4 months.\n\nHow much will he save in total?",
     hint: "Multiply: £85 × 4",
     answer: 340, displayAnswer: "£340",
     explanation: "£85 × 4 = £340",
@@ -13,6 +13,8 @@ export const questions = [
     text: "Bret says the Style Hotel is 650 m nearer to the stadium than the Fair Hotel.\n\nIs Bret correct?\n\nShow why you think this.",
     hint: "Convert 1 km to metres, then subtract 450 m.",
     answer: "No", displayAnswer: "No",
+    justifyPrompt: "What is the actual difference in metres?",
+    justifyAnswer: 550, 
     explanation: "1 km = 1000 m. 1000 − 450 = 550 m difference, not 650 m. Bret is incorrect.",
   },
   {
@@ -88,6 +90,8 @@ export const questions = [
     text: "The chart shows the costs of copying documents.\n\nA customer wants a large size copy.\n\nBret says a large size colour copy costs 48p more than a large size black and white copy.\n\nIs Bret correct?\n\nShow why you think this.",
     hint: "Read the two 'large size' bars, then subtract.",
     answer: "No", displayAnswer: "No",
+    justifyPrompt: "What is the actual difference in pence",
+    justifyAnswer: 46, suffix: "p",
     explanation: "Large colour ≈ 64p, large B&W ≈ 18p. 64 − 18 = 46p, not 48p. Bret is incorrect.",
   },
   {
@@ -96,6 +100,8 @@ export const questions = [
     text: "Bret sells business cards in a box.\n\nThe length of the business cards needs to be 20 mm less than the length of the box.\n\nBret says the business cards will be 6 cm in length.\n\nIs Bret correct?\n\nShow why you think this.",
     hint: "20 mm = 2 cm. Subtract 2 cm from the box length.",
     answer: "No", displayAnswer: "No",
+    justifyPrompt: "What is the actual size required? (in cm)",
+    justifyAnswer: 7,  suffix: "cm",
     explanation: "Box = 9 cm. 20 mm = 2 cm. 9 − 2 = 7 cm. Bret is not correct.",
   },
   {
@@ -113,6 +119,8 @@ export const questions = [
     text: "Bret designs a page in a newspaper.\n\nThe page has a length of 36 cm.\n\nAn advert will take 1/3 of the length of the page.\n\nBret says the advert needs to be 10 cm in length.\n\nIs Bret correct?\n\nShow why you think this.",
     hint: "Calculate: 36 ÷ 3",
     answer: "No", displayAnswer: "No",
+    justifyPrompt: "What is the correct answer?",
+    justifyAnswer: 12,  suffix: "cm",
     explanation: "36 ÷ 3 = 12 cm, not 10 cm. Bret is incorrect.",
   },
   {
@@ -161,7 +169,7 @@ export const questions = [
     id: "B16", sec: "B", marks: 2, type: "number",
     image: "B16 – Water Bottle", imgSrc: "images/QuestionB16.png",
     text: "Bret takes a water bottle to work.\n\nHe has 1 litre of water in the bottle at the start of the day.\n\nThe diagram shows the water left over at the end of the day.\n\nHow much water did Bret use to the nearest division? (ml)",
-    hint: "Subtract: 1000 − 250",
+    hint: "Subtract: 1000 − 300",
     answer: 700, displayAnswer: "700 ml", suffix: "ml",
     explanation: "1000 − 300 = 700 ml used.",
   },

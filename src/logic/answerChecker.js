@@ -24,9 +24,13 @@ export function checkAnswer(q, a) {
       break;
     }
     case "yesno": {
-      correct = a.yesNo === q.answer;
-      userDisplay = a.yesNo;
-      break;
+        const yesNoOk = a.yesNo === q.answer;
+        const justifyOk = q.justifyPrompt
+          ? (q.justifyCheck ? q.justifyCheck(a.justify) : parseFloat(a.justify) === q.justifyAnswer)
+          : true;
+        correct = yesNoOk && justifyOk;
+        userDisplay = q.justifyPrompt ? `${a.yesNo} (${a.justify})` : a.yesNo;
+        break;      
     }
     case "parcel": {
       correct = a.selected === q.answer;
