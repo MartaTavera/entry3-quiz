@@ -73,19 +73,27 @@ export function QuestionInput({ q, a, onUpdate, onSubmit, canSubmit, showHint })
         {q.justifyPrompt && a.yesNo && (
           <div style={{ marginTop: 12 }}>
             <div style={{ fontSize: 13, fontWeight: 600, color: C.neu, marginBottom: 5 }}>{q.justifyPrompt}</div>
-            <input
-              type="text"
-              value={a.justify}
-              onChange={e => upd({ justify: e.target.value })}
-              onKeyDown={e => e.key === "Enter" && canSubmit && onSubmit()}
-              placeholder="Enter your answer…"
-              style={{ width: "100%", padding: "13px 16px", border: `2px solid ${C.bdr}`, borderRadius: 8, fontSize: 20, outline: "none", boxSizing: "border-box" }}
-            />
+            <div style={{ display: "flex", alignItems: "center", border: `2px solid ${C.bdr}`, borderRadius: 8, overflow: "hidden" }}>
+              <input
+                type="text"
+                value={a.justify}
+                onChange={e => upd({ justify: e.target.value })}
+                onKeyDown={e => e.key === "Enter" && canSubmit && onSubmit()}
+                placeholder="Enter your answer…"
+                style={{ flex: 1, padding: "13px 16px", border: "none", fontSize: 20, outline: "none", boxSizing: "border-box" }}
+              />
+              {q.justifySuffix && (
+                <span style={{ padding: "13px 16px", background: "#f1f5f9", color: C.neu, fontSize: 18, fontWeight: 600, borderLeft: `2px solid ${C.bdr}` }}>
+                  {q.justifySuffix}
+                </span>
+              )}
+            </div>
           </div>
         )}
       </div>
     );
   }
+
 
   if (q.type === "parcel") {
     return <ParcelTable sel={a.selected} onSel={v => upd({ selected: v })} showHint={showHint} />;

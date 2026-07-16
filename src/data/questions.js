@@ -15,6 +15,7 @@ export const questions = [
     answer: "No", displayAnswer: "No",
     justifyPrompt: "What is the actual difference in metres?",
     justifyAnswer: 550, 
+    justifySuffix:"m",
     explanation: "1 km = 1000 m. 1000 − 450 = 550 m difference, not 650 m. Bret is incorrect.",
   },
   {
@@ -91,7 +92,7 @@ export const questions = [
     hint: "Read the two 'large size' bars, then subtract.",
     answer: "No", displayAnswer: "No",
     justifyPrompt: "What is the actual difference in pence",
-    justifyAnswer: 46, suffix: "p",
+    justifyAnswer: 46, justifySuffix: "p",
     explanation: "Large colour ≈ 64p, large B&W ≈ 18p. 64 − 18 = 46p, not 48p. Bret is incorrect.",
   },
   {
@@ -101,7 +102,7 @@ export const questions = [
     hint: "20 mm = 2 cm. Subtract 2 cm from the box length.",
     answer: "No", displayAnswer: "No",
     justifyPrompt: "What is the actual size required? (in cm)",
-    justifyAnswer: 7,  suffix: "cm",
+    justifyAnswer: 7,  justifySuffix: "cm",
     explanation: "Box = 9 cm. 20 mm = 2 cm. 9 − 2 = 7 cm. Bret is not correct.",
   },
   {
@@ -120,7 +121,8 @@ export const questions = [
     hint: "Calculate: 36 ÷ 3",
     answer: "No", displayAnswer: "No",
     justifyPrompt: "What is the correct answer?",
-    justifyAnswer: 12,  suffix: "cm",
+    justifyAnswer: 12,  
+    justifySuffix: "cm",
     explanation: "36 ÷ 3 = 12 cm, not 10 cm. Bret is incorrect.",
   },
   {
